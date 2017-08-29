@@ -12,13 +12,10 @@
 		E8032B031F420D7400FCC2DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8032B021F420D7400FCC2DB /* ViewController.swift */; };
 		E8032B081F420D7400FCC2DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8032B071F420D7400FCC2DB /* Assets.xcassets */; };
 		E8032B0B1F420D7400FCC2DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8032B091F420D7400FCC2DB /* LaunchScreen.storyboard */; };
-		E8032B351F428A9B00FCC2DB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E8032B341F428A9B00FCC2DB /* GoogleService-Info.plist */; };
 		E8032B371F428CE000FCC2DB /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8032B361F428CE000FCC2DB /* SignInViewController.swift */; };
-		E8032B391F435BC900FCC2DB /* Twitter-icon-2.png in Resources */ = {isa = PBXBuildFile; fileRef = E8032B381F435BC800FCC2DB /* Twitter-icon-2.png */; };
-		E8032B3C1F435DCE00FCC2DB /* Check.png in Resources */ = {isa = PBXBuildFile; fileRef = E8032B3B1F435DCE00FCC2DB /* Check.png */; };
-		E8032B3E1F43676A00FCC2DB /* followOnProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = E8032B3D1F43676A00FCC2DB /* followOnProfile.png */; };
 		E81B90F91F45145500274B07 /* RandomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81B90F81F45145500274B07 /* RandomTableViewCell.swift */; };
 		E81B90FB1F4521D200274B07 /* ContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81B90FA1F4521D200274B07 /* ContentsViewController.swift */; };
+		E8B78DE11F55EB8D001DB48C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E8B78DE01F55EB8D001DB48C /* GoogleService-Info.plist */; };
 		E8DBA1C31F4E74F90013141D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DBA1C21F4E74F90013141D /* Post.swift */; };
 		E8EA76681F4F46610099254F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8EA76671F4E79FD0099254F /* Main.storyboard */; };
 		E8EA766A1F4F883E0099254F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EA76691F4F883E0099254F /* User.swift */; };
@@ -33,13 +30,10 @@
 		E8032B071F420D7400FCC2DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8032B0A1F420D7400FCC2DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E8032B0C1F420D7400FCC2DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E8032B341F428A9B00FCC2DB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E8032B361F428CE000FCC2DB /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		E8032B381F435BC800FCC2DB /* Twitter-icon-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Twitter-icon-2.png"; path = "../../../../Downloads/Twitter-icon-2.png"; sourceTree = "<group>"; };
-		E8032B3B1F435DCE00FCC2DB /* Check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Check.png; path = ../../../../Downloads/Check.png; sourceTree = "<group>"; };
-		E8032B3D1F43676A00FCC2DB /* followOnProfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = followOnProfile.png; path = ../../../../Downloads/followOnProfile.png; sourceTree = "<group>"; };
 		E81B90F81F45145500274B07 /* RandomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomTableViewCell.swift; sourceTree = "<group>"; };
 		E81B90FA1F4521D200274B07 /* ContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsViewController.swift; sourceTree = "<group>"; };
+		E8B78DE01F55EB8D001DB48C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E8DBA1C21F4E74F90013141D /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		E8EA76671F4E79FD0099254F /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E8EA76691F4F883E0099254F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -99,10 +93,7 @@
 				E8032B071F420D7400FCC2DB /* Assets.xcassets */,
 				E8032B091F420D7400FCC2DB /* LaunchScreen.storyboard */,
 				E8032B0C1F420D7400FCC2DB /* Info.plist */,
-				E8032B341F428A9B00FCC2DB /* GoogleService-Info.plist */,
-				E8032B381F435BC800FCC2DB /* Twitter-icon-2.png */,
-				E8032B3D1F43676A00FCC2DB /* followOnProfile.png */,
-				E8032B3B1F435DCE00FCC2DB /* Check.png */,
+				E8B78DE01F55EB8D001DB48C /* GoogleService-Info.plist */,
 			);
 			path = tableViewApp;
 			sourceTree = "<group>";
@@ -177,12 +168,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8EA76681F4F46610099254F /* Main.storyboard in Resources */,
+				E8B78DE11F55EB8D001DB48C /* GoogleService-Info.plist in Resources */,
 				E8032B0B1F420D7400FCC2DB /* LaunchScreen.storyboard in Resources */,
-				E8032B351F428A9B00FCC2DB /* GoogleService-Info.plist in Resources */,
-				E8032B3E1F43676A00FCC2DB /* followOnProfile.png in Resources */,
 				E8032B081F420D7400FCC2DB /* Assets.xcassets in Resources */,
-				E8032B3C1F435DCE00FCC2DB /* Check.png in Resources */,
-				E8032B391F435BC900FCC2DB /* Twitter-icon-2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
