@@ -54,48 +54,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         sections = ["Newest", "Popular", "Funny"]
     }
     
-    func sortSalonsAlphabeticallyAndReload() {
-        posts.sort { $0.likes < $1.likes }
-        tableView1.reloadData()
-        //
-    }
-    
     @objc func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
-    
-    func fetchPosts(){
-        let ref = Database.database().reference()
-        
-        ref.child("posts").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            let postsSnap = snapshot.value as! [String : AnyObject]
-            
-            for (_,post) in postsSnap {
-                let pOST = Post()
-                if let author = post["author"] as? String, let likes = post["likes"] as? Int, let contents = post["contents"] as? String, let userID = post["userID"] as? String, let postID = post["postID"] as? String {
-                    pOST.author = author
-                    pOST.likes = likes
-                    pOST.contents = contents
-                    pOST.userID = userID
-                    pOST.postID = postID
-                    if let people = post["peopleWhoLike"] as? [String : AnyObject] {
-                        for (_,person) in people {
-                            pOST.peopleWhoLike.append(person as! String)
-                        }
-                    }
-                    
-                    self.posts.append(pOST)
-                }
-                
-            }
-            self.tableView1.reloadData()
-            
-        })
-        ref.removeAllObservers()
-    }
-    
+
     func updateTableValues() {
         
         let ref = Database.database().reference()
@@ -122,6 +85,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
                 
             }
+            self.posts = self.posts.sorted {
+                $0.likes > $1.likes
+            }
             self.tableView1.reloadData()
             
         })
@@ -140,14 +106,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
                 let userPost = ref.child("users").child((currentUser?.uid)!).child("Posts")
                 let newPostReference = userPost.child(key)
-                newPostReference.setValue(["userID": currentUser?.uid, "contents" : postTextField.text!, "likes" : 0, "author": currentUser?.displayName, "postID": key, "peopleWhoLike" : [""]])
+                newPostReference.setValue(["userID": currentUser?.uid, "contents" : postTextField.text!, "likes" : 0, "author": currentUser?.displayName, "postID": key])
                 
                 let postsList = ref.child("posts").child(key)
-                postsList.setValue(["userID": currentUser?.uid, "contents" : postTextField.text!, "likes" : 0, "author": currentUser?.displayName, "postID": key, "peopleWhoLike" : [""]])
+                postsList.setValue(["userID": currentUser?.uid, "contents" : postTextField.text!, "likes" : 0, "author": currentUser?.displayName, "postID": key])
             }
             else {
                let anonymousPost = ref.child("posts").child(key)
-                anonymousPost.setValue(["userID": "", "contents" : postTextField.text!, "likes" : 0, "author": "Anonymous", "postID": key, "peopleWhoLike" : [""]])
+                anonymousPost.setValue(["userID": "", "contents" : postTextField.text!, "likes" : 0, "author": "Anonymous", "postID": key])
             }
             
           //  ref.child("posts").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
@@ -223,7 +189,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         view.backgroundColor = UIColor.green
         
         let label = UILabel()
-        label.text = sections[section] as! String
+        label.text = sections[section] as? String
         label.frame = CGRect(x: 45, y: 5, width: 100, height: 35)
         view.addSubview(label)
         
