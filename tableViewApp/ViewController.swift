@@ -17,12 +17,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var sections:NSArray = []
     
     @IBOutlet weak var logoutButton: UIBarButtonItem!
-    var myList: [String] = []
-    var usernameList: [String] = []
     
     @IBOutlet weak var tableView1: UITableView!
-    var activeField: UITextField?
-    
     
     var ref: DatabaseReference!
     var handle: DatabaseHandle?
@@ -48,6 +44,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         })
         
         updateTableValues()
+        
         //Looks for single or multiple taps.
         let tapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
         tapped.cancelsTouchesInView = false
@@ -55,6 +52,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         view.addGestureRecognizer(tapped)
         
         sections = ["Newest", "Popular", "Funny"]
+    }
+    
+    func sortSalonsAlphabeticallyAndReload() {
+        posts.sort { $0.likes < $1.likes }
+        tableView1.reloadData()
+        //
     }
     
     @objc func dismissKeyboard() {
@@ -71,11 +74,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             for (_,post) in postsSnap {
                 let pOST = Post()
-                if let author = post["author"] as? String, let likes = post["likes"] as? Int, let contents = post["contents"] as? String, let userID = post["userID"] as? String {
+                if let author = post["author"] as? String, let likes = post["likes"] as? Int, let contents = post["contents"] as? String, let userID = post["userID"] as? String, let postID = post["postID"] as? String {
                     pOST.author = author
                     pOST.likes = likes
                     pOST.contents = contents
                     pOST.userID = userID
+                    pOST.postID = postID
+                    if let people = post["peopleWhoLike"] as? [String : AnyObject] {
+                        for (_,person) in people {
+                            pOST.peopleWhoLike.append(person as! String)
+                        }
+                    }
                     
                     self.posts.append(pOST)
                 }
@@ -97,11 +106,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.posts.removeAll()
             for (_,post) in postsSnap {
                 let pOST = Post()
-                if let author = post["author"] as? String, let likes = post["likes"] as? Int, let contents = post["contents"] as? String, let userID = post["userID"] as? String {
+                if let author = post["author"] as? String, let likes = post["likes"] as? Int, let contents = post["contents"] as? String, let userID = post["userID"] as? String, let postID = post["postID"] as? String {
                     pOST.author = author
                     pOST.likes = likes
                     pOST.contents = contents
                     pOST.userID = userID
+                    pOST.postID = postID
+                    if let people = post["peopleWhoLike"] as? [String : AnyObject] {
+                        for (_,person) in people {
+                            pOST.peopleWhoLike.append(person as! String)
+                        }
+                    }
                     
                     self.posts.append(pOST)
                 }
@@ -125,14 +140,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
                 let userPost = ref.child("users").child((currentUser?.uid)!).child("Posts")
                 let newPostReference = userPost.child(key)
-                newPostReference.setValue(["post ID": key, "post contents" : postTextField.text!])
+                newPostReference.setValue(["userID": currentUser?.uid, "contents" : postTextField.text!, "likes" : 0, "author": currentUser?.displayName, "postID": key, "peopleWhoLike" : [""]])
                 
                 let postsList = ref.child("posts").child(key)
-                    postsList.setValue(["userID": currentUser?.uid, "contents" : postTextField.text!, "likes" : 0, "author": currentUser?.displayName])
+                postsList.setValue(["userID": currentUser?.uid, "contents" : postTextField.text!, "likes" : 0, "author": currentUser?.displayName, "postID": key, "peopleWhoLike" : [""]])
             }
             else {
                let anonymousPost = ref.child("posts").child(key)
-                anonymousPost.setValue(["userID": "", "contents" : postTextField.text!, "likes" : 0, "author": "Anonyms"])
+                anonymousPost.setValue(["userID": "", "contents" : postTextField.text!, "likes" : 0, "author": "Anonymous", "postID": key, "peopleWhoLike" : [""]])
             }
             
           //  ref.child("posts").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
@@ -177,19 +192,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return posts.count
     }
     
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! RandomTableViewCell
         
-        
         cell.descriptionLabel?.text = self.posts[indexPath.row].contents
         cell.usernameLabel?.text = self.posts[indexPath.row].author
-        var number = self.posts[indexPath.row].likes
-        cell.likeCount?.text = String(describing: number)
+        cell.likeCount.text = "\(self.posts[indexPath.row].likes!) likes"
+        cell.postID = self.posts[indexPath.row].postID
+        
+        for person in self.posts[indexPath.row].peopleWhoLike {
+            if person == Auth.auth().currentUser?.uid {
+                cell.likeButton.isHidden = true
+                cell.unlikeButton.isHidden = false
+                break
+            }
+        }
+        
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+        return 1
     }
     
     
