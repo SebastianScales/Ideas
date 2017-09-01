@@ -91,6 +91,7 @@ class RandomTableViewCell: UITableViewCell {
     }
     
     @IBAction func unlikeButtonPressed(_ sender: Any) {
+        
         self.unlikeButton.isEnabled = false
         let ref = Database.database().reference()
         
@@ -107,13 +108,14 @@ class RandomTableViewCell: UITableViewCell {
                                         if let prop = snap.value as? [String: AnyObject] {
                                             if let likes = prop["peopleWhoLike"] as? [String : AnyObject] {
                                                 let count = likes.count
-                                                self.likeCount.text = "\(count) Likes"
                                                 ref.child("posts").child(self.postID).updateChildValues(["likes":count])
+                                                self.likeCount.text = "\(count) likes"
                                                 
                                             }
                                             else {
-                                                self.likeCount.text = "0 Likes"
                                                 ref.child("posts").child(self.postID).updateChildValues(["likes":0])
+                                                
+                                                self.likeCount.text = "0 Likes"
                                                 
                                             }
                                         }

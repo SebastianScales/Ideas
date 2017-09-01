@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1878CE88339532938ACEBE60 /* Pods_tableViewApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F162A5D5E664E845168A3F55 /* Pods_tableViewApp.framework */; };
+		E80195691F5891A100EACECF /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80195681F5891A100EACECF /* CommentsTableViewCell.swift */; };
+		E801956B1F58A63A00EACECF /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E801956A1F58A63A00EACECF /* Comment.swift */; };
 		E8032B011F420D7400FCC2DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8032B001F420D7400FCC2DB /* AppDelegate.swift */; };
 		E8032B031F420D7400FCC2DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8032B021F420D7400FCC2DB /* ViewController.swift */; };
 		E8032B081F420D7400FCC2DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8032B071F420D7400FCC2DB /* Assets.xcassets */; };
@@ -24,6 +26,8 @@
 /* Begin PBXFileReference section */
 		15DAD4AA7054B3DC4CD8D39E /* Pods-tableViewApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tableViewApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tableViewApp/Pods-tableViewApp.debug.xcconfig"; sourceTree = "<group>"; };
 		4DE532090C25A32CF4727A67 /* Pods-tableViewApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tableViewApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-tableViewApp/Pods-tableViewApp.release.xcconfig"; sourceTree = "<group>"; };
+		E80195681F5891A100EACECF /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
+		E801956A1F58A63A00EACECF /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		E8032AFD1F420D7400FCC2DB /* tableViewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tableViewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8032B001F420D7400FCC2DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8032B021F420D7400FCC2DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -82,9 +86,11 @@
 		E8032AFF1F420D7400FCC2DB /* tableViewApp */ = {
 			isa = PBXGroup;
 			children = (
+				E80195681F5891A100EACECF /* CommentsTableViewCell.swift */,
 				E8EA76671F4E79FD0099254F /* Main.storyboard */,
 				E8032B001F420D7400FCC2DB /* AppDelegate.swift */,
 				E8032B021F420D7400FCC2DB /* ViewController.swift */,
+				E801956A1F58A63A00EACECF /* Comment.swift */,
 				E8EA76691F4F883E0099254F /* User.swift */,
 				E8DBA1C21F4E74F90013141D /* Post.swift */,
 				E81B90FA1F4521D200274B07 /* ContentsViewController.swift */,
@@ -151,6 +157,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = E8032AF41F420D7400FCC2DB;
 			productRefGroup = E8032AFE1F420D7400FCC2DB /* Products */;
@@ -246,6 +253,8 @@
 				E81B90F91F45145500274B07 /* RandomTableViewCell.swift in Sources */,
 				E8032B011F420D7400FCC2DB /* AppDelegate.swift in Sources */,
 				E8EA766A1F4F883E0099254F /* User.swift in Sources */,
+				E801956B1F58A63A00EACECF /* Comment.swift in Sources */,
+				E80195691F5891A100EACECF /* CommentsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

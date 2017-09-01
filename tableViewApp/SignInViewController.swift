@@ -30,11 +30,11 @@ class SignInViewController: UIViewController {
         
         ref = Database.database().reference()
         
-        if email.text != "" && password.text != "" {
-            
             if segControl.selectedSegmentIndex == 0 {//Sign in User
                 
-                Auth.auth().signIn(withEmail: email.text!, password: password.text!, completion: { (user, error) in
+                if email.text != "" && password.text != "" {
+                    
+                    Auth.auth().signIn(withEmail: email.text!, password: password.text!, completion: { (user, error) in
                     if user != nil {
                         self.performSegue(withIdentifier: "signInToFeedSegue", sender: nil)
                         
@@ -50,9 +50,8 @@ class SignInViewController: UIViewController {
                     
                 })
             }
-            else{ //Sign up User
+            else if email.text != "" && password.text != "" && username.text != "" { //Sign up User
                 Auth.auth().createUser(withEmail: email.text!, password: password.text!, completion: { ( user, error) in
-  
                     
                     if user == nil {
                         if let myError = error?.localizedDescription{

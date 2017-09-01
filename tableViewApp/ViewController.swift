@@ -115,11 +115,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                let anonymousPost = ref.child("posts").child(key)
                 anonymousPost.setValue(["userID": "", "contents" : postTextField.text!, "likes" : 0, "author": "Anonymous", "postID": key])
             }
-            
-          //  ref.child("posts").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
-                
-                
-         //   })
+
                 
             updateTableValues()
             
@@ -140,6 +136,74 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.performSegue(withIdentifier: "feedToSignInSegue", sender: nil)
     }
     
+    @IBAction func newestPressed(_ sender: Any) {
+        let ref = Database.database().reference()
+        
+        ref.child("posts").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let postsSnap = snapshot.value as! [String : AnyObject]
+            self.posts.removeAll()
+            for (_,post) in postsSnap {
+                let pOST = Post()
+                if let author = post["author"] as? String, let likes = post["likes"] as? Int, let contents = post["contents"] as? String, let userID = post["userID"] as? String, let postID = post["postID"] as? String {
+                    pOST.author = author
+                    pOST.likes = likes
+                    pOST.contents = contents
+                    pOST.userID = userID
+                    pOST.postID = postID
+                    if let people = post["peopleWhoLike"] as? [String : AnyObject] {
+                        for (_,person) in people {
+                            pOST.peopleWhoLike.append(person as! String)
+                        }
+                    }
+                    
+                    self.posts.append(pOST)
+                }
+                
+            }
+            self.posts = self.posts.sorted {
+                $0.likes < $1.likes
+            }
+            self.tableView1.reloadData()
+            
+        })
+        ref.removeAllObservers()
+    }
+    
+    @IBAction func popularPressed(_ sender: Any) {
+        let ref = Database.database().reference()
+        
+        ref.child("posts").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let postsSnap = snapshot.value as! [String : AnyObject]
+            self.posts.removeAll()
+            for (_,post) in postsSnap {
+                let pOST = Post()
+                if let author = post["author"] as? String, let likes = post["likes"] as? Int, let contents = post["contents"] as? String, let userID = post["userID"] as? String, let postID = post["postID"] as? String {
+                    pOST.author = author
+                    pOST.likes = likes
+                    pOST.contents = contents
+                    pOST.userID = userID
+                    pOST.postID = postID
+                    if let people = post["peopleWhoLike"] as? [String : AnyObject] {
+                        for (_,person) in people {
+                            pOST.peopleWhoLike.append(person as! String)
+                        }
+                    }
+                    
+                    self.posts.append(pOST)
+                }
+                
+            }
+            self.posts = self.posts.sorted {
+                $0.likes > $1.likes
+            }
+            self.tableView1.reloadData()
+            
+        })
+        ref.removeAllObservers()
+    }
+    
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -150,6 +214,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         DvC.getText = posts[indexPath.row].contents
         DvC.getUsername = posts[indexPath.row].author
+        DvC.getPostID = posts[indexPath.row].postID
+        
         self.navigationController?.pushViewController(DvC, animated: true)
         
     }
@@ -157,7 +223,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
-    
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -199,6 +264,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 45
     }
-    
+        
 }
 

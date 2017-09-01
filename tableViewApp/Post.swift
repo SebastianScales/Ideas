@@ -15,6 +15,7 @@ class Post: NSObject {
     var contents: String!
     var userID: String!
     var postID: String!
+    var comments: [Comment] = [Comment]()
     var peopleWhoLike: [String] = [String]()
     
 }
