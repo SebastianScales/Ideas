@@ -42,6 +42,9 @@ class ContentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         view.addGestureRecognizer(tapped)
         
+        self.unlikeButton.isHidden = true
+        
+        
         labelTest.text! = getText
         usernameLabelz.text! = getUsername
         postID = getPostID
@@ -72,9 +75,7 @@ class ContentsViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     @IBAction func likePressed(_ sender: Any) {
-        self.likeButton.isHidden = true
-        self.unlikeButton.isHidden = false
-        labelTest.backgroundColor = UIColor.green
+       
     }
     
     @IBAction func unlikePressed(_ sender: Any) {
@@ -149,12 +150,12 @@ class ContentsViewController: UIViewController, UITableViewDelegate, UITableView
                     cOMMENT.postID = postID as! String
                     cOMMENT.commentID = commentID
                     cOMMENT.peopleWhoLike = [""]
-//                    if let people = comment["peopleWhoLike"] as? [String : AnyObject] {
-//                        for (_,person) in people {
-//                            cOMMENT.peopleWhoLike.append(person as! String)
-//                        }
-//                    }
-//
+                    if let people = comment["peopleWhoLike"] as? [String : AnyObject] {
+                        for (_,person) in people {
+                            cOMMENT.peopleWhoLike.append(person as! String)
+                        }
+                    }
+                    
                     self.comments.append(cOMMENT)
                 }
                 
@@ -177,7 +178,7 @@ class ContentsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.usernameLabel.text! = self.comments[indexPath.row].username
         cell.likeLabel.text! = "\(self.comments[indexPath.row].likes!) likes"
         cell.commentLabel.text! = self.comments[indexPath.row].contents
-        
+        cell.commentID = self.comments[indexPath.row].commentID
         return cell
     }
     

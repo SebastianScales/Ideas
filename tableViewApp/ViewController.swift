@@ -137,73 +137,80 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @IBAction func newestPressed(_ sender: Any) {
-        let ref = Database.database().reference()
+    
+//        let ref = Database.database().reference()
+//
+//        ref.child("posts").observeSingleEvent(of: .value, with: { (snapshot) in
+//
+//            let postsSnap = snapshot.value as! [String : AnyObject]
+//            self.posts.removeAll()
+//            for (_,post) in postsSnap {
+//                let pOST = Post()
+//                if let author = post["author"] as? String, let likes = post["likes"] as? Int, let contents = post["contents"] as? String, let userID = post["userID"] as? String, let postID = post["postID"] as? String {
+//                    pOST.author = author
+//                    pOST.likes = likes
+//                    pOST.contents = contents
+//                    pOST.userID = userID
+//                    pOST.postID = postID
+//                    if let people = post["peopleWhoLike"] as? [String : AnyObject] {
+//                        for (_,person) in people {
+//                            pOST.peopleWhoLike.append(person as! String)
+//                        }
+//                    }
+//
+//                    self.posts.append(pOST)
+//                }
+//
+//            }
+//            self.posts = self.posts.sorted {
+//                $0.likes < $1.likes
+//            }
+//            self.tableView1.reloadData()
+//
+//        })
+//        ref.removeAllObservers()
         
-        ref.child("posts").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            let postsSnap = snapshot.value as! [String : AnyObject]
-            self.posts.removeAll()
-            for (_,post) in postsSnap {
-                let pOST = Post()
-                if let author = post["author"] as? String, let likes = post["likes"] as? Int, let contents = post["contents"] as? String, let userID = post["userID"] as? String, let postID = post["postID"] as? String {
-                    pOST.author = author
-                    pOST.likes = likes
-                    pOST.contents = contents
-                    pOST.userID = userID
-                    pOST.postID = postID
-                    if let people = post["peopleWhoLike"] as? [String : AnyObject] {
-                        for (_,person) in people {
-                            pOST.peopleWhoLike.append(person as! String)
-                        }
-                    }
-                    
-                    self.posts.append(pOST)
-                }
-                
-            }
-            self.posts = self.posts.sorted {
-                $0.likes < $1.likes
-            }
-            self.tableView1.reloadData()
-            
-        })
-        ref.removeAllObservers()
+        createAlert(title: "Yoo", message: "Still developing this brobeans")
+
+        
     }
     
     @IBAction func popularPressed(_ sender: Any) {
-        let ref = Database.database().reference()
+//        let ref = Database.database().reference()
+//
+//        ref.child("posts").observeSingleEvent(of: .value, with: { (snapshot) in
+//
+//            let postsSnap = snapshot.value as! [String : AnyObject]
+//            self.posts.removeAll()
+//            for (_,post) in postsSnap {
+//                let pOST = Post()
+//                if let author = post["author"] as? String, let likes = post["likes"] as? Int, let contents = post["contents"] as? String, let userID = post["userID"] as? String, let postID = post["postID"] as? String {
+//                    pOST.author = author
+//                    pOST.likes = likes
+//                    pOST.contents = contents
+//                    pOST.userID = userID
+//                    pOST.postID = postID
+//                    if let people = post["peopleWhoLike"] as? [String : AnyObject] {
+//                        for (_,person) in people {
+//                            pOST.peopleWhoLike.append(person as! String)
+//                        }
+//                    }
+//
+//                    self.posts.append(pOST)
+//                }
+//
+//            }
+//            self.posts = self.posts.sorted {
+//                $0.likes > $1.likes
+//            }
+//            self.tableView1.reloadData()
+//
+//        })
+//        ref.removeAllObservers()
         
-        ref.child("posts").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            let postsSnap = snapshot.value as! [String : AnyObject]
-            self.posts.removeAll()
-            for (_,post) in postsSnap {
-                let pOST = Post()
-                if let author = post["author"] as? String, let likes = post["likes"] as? Int, let contents = post["contents"] as? String, let userID = post["userID"] as? String, let postID = post["postID"] as? String {
-                    pOST.author = author
-                    pOST.likes = likes
-                    pOST.contents = contents
-                    pOST.userID = userID
-                    pOST.postID = postID
-                    if let people = post["peopleWhoLike"] as? [String : AnyObject] {
-                        for (_,person) in people {
-                            pOST.peopleWhoLike.append(person as! String)
-                        }
-                    }
-                    
-                    self.posts.append(pOST)
-                }
-                
-            }
-            self.posts = self.posts.sorted {
-                $0.likes > $1.likes
-            }
-            self.tableView1.reloadData()
-            
-        })
-        ref.removeAllObservers()
+        createAlert(title: "Yoo", message: "Still developing this brobeans")
+        
     }
-    
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -223,7 +230,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! RandomTableViewCell
@@ -264,6 +270,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 45
     }
-        
+    
+    func createAlert (title:String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "My b", style: UIAlertActionStyle.default, handler: {(action) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+    }
+    
 }
 

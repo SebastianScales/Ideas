@@ -291,7 +291,7 @@
                                 </constraints>
                                 <state key="normal" title="Newest"/>
                                 <connections>
-                                    <action selector="newestPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3ew-yh-EXu"/>
+                                    <action selector="newestPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AjE-08-qse"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QZ4-4L-coz">
